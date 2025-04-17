@@ -1,4 +1,4 @@
-package hu.baksaz.example.game;
+package hu.baksaz.example.engine;
 
 public class GameManager {
 

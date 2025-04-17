@@ -1,4 +1,4 @@
-package hu.baksaz.example.game;
+package hu.baksaz.example.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;

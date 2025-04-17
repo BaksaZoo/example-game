@@ -1,4 +1,4 @@
-package hu.baksaz.example.game;
+package hu.baksaz.example.engine;
 
 @FunctionalInterface
 public interface Listener<T extends Event> {
