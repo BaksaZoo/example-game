@@ -1,12 +1,12 @@
 package hu.baksaz.example.game;
 
-public class GameManager implements ApplicationEventListener<InputEvent> {
+public class GameManager {
 
   private boolean shouldExit = false;
   private InputManager inputManager;
 
   public GameManager() {
-    ApplicationContext.getPublisher().listen(this);
+    ApplicationContext.getPublisher().subscribe(InputEvent.class, this::handleEvent);
   }
 
   public void startGame() {
@@ -24,8 +24,7 @@ public class GameManager implements ApplicationEventListener<InputEvent> {
     inputManager = new InputManager();
   }
 
-  @Override
-  public void onApplicationEvent(InputEvent event) {
+  private void handleEvent(InputEvent event) {
     shouldExit = true;
   }
 }

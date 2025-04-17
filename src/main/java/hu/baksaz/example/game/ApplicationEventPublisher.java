@@ -1,46 +1,24 @@
 package hu.baksaz.example.game;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ApplicationEventPublisher {
 
-  private List<ApplicationEventListener<? extends Event>> listeners = new ArrayList<>();
+  private final Map<Class<? extends Event>, List<Listener<? extends Event>>> listeners = new HashMap<>();
 
-  public void listen(ApplicationEventListener<? extends Event> listener) {
-    listeners.add(listener);
+  public <T extends Event> void subscribe(Class<T> eventType, Listener<T> listener) {
+    listeners.computeIfAbsent(eventType, k -> new ArrayList<>())
+      .add(listener);
   }
 
-  public void publish(Event event) {
-    for (ApplicationEventListener<? extends Event> listener : listeners) {
-      Class<?> listenerType = resolveEventType(listener);
-
-      if (listenerType != null && listenerType.isAssignableFrom(event.getClass())) {
-        invokeListener(listener, event);
-      }
-    }
+  public <T extends Event> void publish(T event) {
+    Class<?> eventClass = event.getClass();
+    @SuppressWarnings("unchecked")
+    List<Listener<T>> typedListeners = (List<Listener<T>>) (List<?>) listeners.getOrDefault(eventClass, List.of());
+    typedListeners.forEach(listener -> listener.handleEvent(event));
   }
 
-  private static void invokeListener(ApplicationEventListener<? extends Event> listener, Event event) {
-    try {
-      ((ApplicationEventListener<Event>) listener).onApplicationEvent(event);
-    } catch (ClassCastException e) {
-      // Skip incompatible listener
-    }
-  }
-
-  private static Class<?> resolveEventType(ApplicationEventListener<? extends Event> listener) {
-    for (Type iface : listener.getClass().getGenericInterfaces()) {
-      if (iface instanceof ParameterizedType paramType &&
-          paramType.getRawType() == ApplicationEventListener.class) {
-        Type actualType = paramType.getActualTypeArguments()[0];
-        if (actualType instanceof Class<?>) {
-          return (Class<?>) actualType;
-        }
-      }
-    }
-    return null;
-  }
 }

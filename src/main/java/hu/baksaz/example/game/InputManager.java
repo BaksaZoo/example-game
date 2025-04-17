@@ -2,14 +2,13 @@ package hu.baksaz.example.game;
 
 import java.io.IOException;
 
-public class InputManager implements ApplicationEventListener<GameTickEvent> {
+public class InputManager {
 
   public InputManager() {
-    ApplicationContext.getPublisher().listen(this);
+    ApplicationContext.getPublisher().subscribe(GameTickEvent.class, this::handleEvent);
   }
 
-  @Override
-  public void onApplicationEvent(GameTickEvent event) {
+  public void handleEvent(GameTickEvent event) {
     try {
       if (System.in.available() > 0) {
         char c = (char) System.in.read();
