@@ -1,11 +1,11 @@
 package hu.baksaz.example.engine;
 
-public class GameManager {
+public class Game {
 
   private boolean shouldExit = false;
   private InputManager inputManager;
 
-  public GameManager() {
+  public Game() {
   }
 
   public void startGame() {
