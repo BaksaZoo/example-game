@@ -6,7 +6,6 @@ public class GameManager {
   private InputManager inputManager;
 
   public GameManager() {
-    ApplicationContext.getPublisher().subscribe(InputEvent.class, this::handleEvent);
   }
 
   public void startGame() {
@@ -18,13 +17,13 @@ public class GameManager {
   }
 
   /**
-   * Initialize game and register main components ex.: InputManager
+   * Initialize the game and register main parts ex.: InputManager
    */
   private void registerComponents() {
     inputManager = new InputManager();
   }
 
-  private void handleEvent(InputEvent event) {
+  public void stopGame() {
     shouldExit = true;
   }
 }
