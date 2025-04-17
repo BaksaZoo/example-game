@@ -13,9 +13,14 @@ public class GameManager {
     }
     
     public void start() {
+        initGameObjects();
         game.startGame();
     }
-    
+
+    private void initGameObjects() {
+        Player player = new Player();
+    }
+
     private void handleInput(InputEvent event) {
         if (event.getKey() == KeyEvent.VK_ESCAPE) {
             game.stopGame();

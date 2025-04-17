@@ -15,6 +15,8 @@ public class Game {
     // main game loop
     while (!shouldExit) {
       ApplicationContext.getPublisher().publish(new GameTickEvent());
+
+      windowManager.show();
     }
   }
 

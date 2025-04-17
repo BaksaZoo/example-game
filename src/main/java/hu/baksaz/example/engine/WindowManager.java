@@ -32,6 +32,7 @@ public class WindowManager {
     panel.setBackground(Color.BLACK);
     panel.setFocusable(true);
     frame.add(panel);
+    ApplicationContext.setPanel(panel);
 
     panel.addKeyListener(new KeyAdapter() {
       @Override
