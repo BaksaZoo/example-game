@@ -3,13 +3,15 @@ package hu.baksaz.example.engine;
 public class Game {
 
   private boolean shouldExit = false;
-  private InputManager inputManager;
+  private WindowManager windowManager;
 
-  public Game() {
+  public Game(String title, int width, int height) {
+    windowManager = new WindowManager(title, width, height);
   }
 
   public void startGame() {
-    registerComponents();
+    initComponents();
+
     // main game loop
     while (!shouldExit) {
       ApplicationContext.getPublisher().publish(new GameTickEvent());
@@ -19,11 +21,13 @@ public class Game {
   /**
    * Initialize the game and register main parts ex.: InputManager
    */
-  private void registerComponents() {
-    inputManager = new InputManager();
+  private void initComponents() {
+    windowManager.init();
+    windowManager.show();
   }
 
   public void stopGame() {
+    windowManager.close();
     shouldExit = true;
   }
 }
