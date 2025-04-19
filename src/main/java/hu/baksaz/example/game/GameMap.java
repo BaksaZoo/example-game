@@ -22,6 +22,7 @@ public class GameMap {
           .setX(i * (width / 3) + borderThickness)
           .setY(j * (height / 3) + borderThickness)
           .setColor(Color.BLUE);
+        box2D.onClick(e -> box2D.setColor(GameUtil.randomColor()));
         tektons.add(box2D);
       }
     }
