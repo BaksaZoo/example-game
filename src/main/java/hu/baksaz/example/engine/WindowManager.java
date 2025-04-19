@@ -4,9 +4,8 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class WindowManager {
   private final String title;
@@ -36,8 +35,14 @@ public class WindowManager {
 
     panel.addKeyListener(new KeyAdapter() {
       @Override
-      public void keyPressed(KeyEvent e) {
-        ApplicationContext.getPublisher().publish(new InputEvent((char) e.getKeyCode()));
+      public void keyPressed(java.awt.event.KeyEvent e) {
+        ApplicationContext.getPublisher().publish(e);
+      }
+    });
+    panel.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        ApplicationContext.getPublisher().publish(e);
       }
     });
   }

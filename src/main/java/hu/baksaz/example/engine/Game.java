@@ -14,7 +14,7 @@ public class Game {
 
     // main game loop
     while (!shouldExit) {
-      ApplicationContext.getPublisher().publish(new GameTickEvent());
+      ApplicationContext.getPublisher().publish(new GameTickEvent(this));
 
       windowManager.show();
     }

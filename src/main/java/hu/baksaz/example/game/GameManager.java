@@ -9,7 +9,7 @@ public class GameManager {
     public GameManager() {
         game = new Game("Game Window", 800, 600);
 
-        ApplicationContext.getPublisher().subscribe(InputEvent.class, this::handleInput);
+        ApplicationContext.getPublisher().subscribe(KeyEvent.class, this::handleInput);
     }
     
     public void start() {
@@ -21,8 +21,8 @@ public class GameManager {
         Player player = new Player();
     }
 
-    private void handleInput(InputEvent event) {
-        if (event.getKey() == KeyEvent.VK_ESCAPE) {
+    private void handleInput(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
             game.stopGame();
         }
     }

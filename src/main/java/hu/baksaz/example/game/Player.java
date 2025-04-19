@@ -2,7 +2,8 @@ package hu.baksaz.example.game;
 
 import hu.baksaz.example.engine.ApplicationContext;
 import hu.baksaz.example.engine.Box2D;
-import hu.baksaz.example.engine.InputEvent;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.StringJoiner;
 
 public class Player {
@@ -13,13 +14,15 @@ public class Player {
       .setWidth(10)
       .setHeight(10)
       .setX(100)
-      .setY(100);
+      .setY(100)
+      .setColor(Color.RED);
+    this.player.onClick(e -> player.setColor(Color.GREEN));
 
-    ApplicationContext.getPublisher().subscribe(InputEvent.class, this::handleInput);
+    ApplicationContext.getPublisher().subscribe(KeyEvent.class, this::handleInput);
   }
 
-  private void handleInput(InputEvent inputEvent) {
-    switch (Character.toLowerCase(inputEvent.getKey())) {
+  private void handleInput(KeyEvent keyEvent) {
+    switch (Character.toLowerCase(keyEvent.getKeyChar())) {
       case 'w' -> player.setY(player.getY() - 10);
       case 's' -> player.setY(player.getY() + 10);
       case 'a' -> player.setX(player.getX() - 10);
