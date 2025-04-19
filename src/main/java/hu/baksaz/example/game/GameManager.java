@@ -19,6 +19,7 @@ public class GameManager {
 
     private void initGameObjects() {
         Player player = new Player();
+        GameMap gameMap = new GameMap();
     }
 
     private void handleInput(KeyEvent event) {

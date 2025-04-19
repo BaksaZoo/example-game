@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -35,7 +36,7 @@ public class WindowManager {
 
     panel.addKeyListener(new KeyAdapter() {
       @Override
-      public void keyPressed(java.awt.event.KeyEvent e) {
+      public void keyPressed(KeyEvent e) {
         ApplicationContext.getPublisher().publish(e);
       }
     });
@@ -55,5 +56,13 @@ public class WindowManager {
 
   public void close() {
     frame.dispose();
+  }
+
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
   }
 }

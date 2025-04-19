@@ -23,8 +23,9 @@ public class Box2D {
   private void render(GameTickEvent e) {
     var g = ApplicationContext.getPanel().getGraphics();
     g.setColor(color);
-//    g.drawRect(x, y, width, height);
     g.fillRect(x, y, width, height);
+    g.setColor(Color.WHITE);
+    g.drawRect(x, y, width, height);
   }
 
   public void onClick(Listener<MouseEvent> listener) {

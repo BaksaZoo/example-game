@@ -7,6 +7,7 @@ public class Game {
 
   public Game(String title, int width, int height) {
     windowManager = new WindowManager(title, width, height);
+    ApplicationContext.setWindowManager(windowManager);
   }
 
   public void startGame() {
